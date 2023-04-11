@@ -1,11 +1,10 @@
-import pandas as pd
 from utils.one_hot import OneHotBuilder
 from utils import outlier
 from utils.read_data import FileReader
-from catboost import CatBoostClassifier
 from sklearn.metrics import accuracy_score
 from utils.optimizer import GAOptimizer
 from loguru import logger
+from lightgbm import LGBMClassifier
 
 
 def solve_outlier(data):
@@ -54,23 +53,22 @@ train_x, train_y, test_x, test_y = read()
 def target(p):
     params = {
         "learning_rate": p[0],
-        "iterations": int(p[1])
     }
     acc = model(params)
-    logger.info(f"ACC: {acc} Learning rate: {p[0]}, Iterations: {int(p[1])}")
+    logger.info(f"ACC: {acc} Learning rate: {p[0]}")
     return acc
 
 
 def model(params):
-    clf = CatBoostClassifier(**params)
-    clf.fit(train_x, train_y)
-    pred = clf.predict(test_x)
+    model = LGBMClassifier(**params)
+    model.fit(train_x, train_y)
+    pred = model.predict(test_x)
     return accuracy_score(test_y, pred)
 
 
 if __name__ == "__main__":
-    lb = [0, 5000]
-    ub = [0.01, 20000]
+    lb = [0]
+    ub = [0.01]
 
     optimizer = GAOptimizer(
         func=target, lb=lb, ub=ub
