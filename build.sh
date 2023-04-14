@@ -1,0 +1,1 @@
+docker build -t competitions . --tag registry.cn-shanghai.aliyuncs.com/xinzf/competitions:latest
