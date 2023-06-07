@@ -1,3 +1,8 @@
+import sys
+
+sys.path.append("./")
+sys.path.append("../")
+
 from utils.one_hot import OneHotBuilder
 from utils import outlier
 from utils.read_data import FileReader
@@ -37,12 +42,12 @@ def solve_subscribe(data):
 
 
 def read():
-    reader = FileReader("./data/train.csv", "subscribe", [solve_outlier, one_hot, solve_subscribe])
+    reader = FileReader(["./data/train.csv", "./BankCustomerSubscriptionProductForecast/data/train.csv"], "subscribe", [solve_outlier, one_hot, solve_subscribe])
     return reader.read()
 
 
 def read_test():
-    reader = FileReader("./data/test.csv", "subscribe", [solve_outlier, one_hot, solve_subscribe])
+    reader = FileReader(["./data/train.csv", "./BankCustomerSubscriptionProductForecast/data/train.csv"], "subscribe", [solve_outlier, one_hot, solve_subscribe])
     return reader.read_no_seg()
 
 

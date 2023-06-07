@@ -1,10 +1,15 @@
+import os.path
+
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
 
 class FileReader:
-    def __init__(self, file_path, y, preprocess_list: list, test_size=0.3):
-        self.file_path = file_path
+    def __init__(self, file_path_list, y, preprocess_list: list, test_size=0.3):
+        for p in file_path_list:
+            if os.path.exists(p):
+                self.file_path = p
+                break
         self.y = y
         self.test_size = test_size
         self.preprocess_list = preprocess_list
