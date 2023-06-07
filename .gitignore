@@ -2,3 +2,5 @@
 *.log
 catboost_info
 .idea
+source_data
+__pycache__
