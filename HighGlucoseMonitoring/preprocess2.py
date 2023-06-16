@@ -1,3 +1,5 @@
+import shutil
+
 import pandas as pd
 import os
 
@@ -58,5 +60,10 @@ def merge(item, path):
 if __name__ == "__main__":
     path = r"D:\Project\Competitions\HighGlucoseMonitoring\source_data"
 
+    # for folder in os.listdir(path):
+    #     merge(folder, os.path.join(path, folder))
+
     for folder in os.listdir(path):
-        merge(folder, os.path.join(path, folder))
+        target = os.path.join(path, folder, "treated.csv")
+        if os.path.exists(target):
+            shutil.copyfile(target, os.path.join(f"./data/{folder}.csv"))
