@@ -5,7 +5,7 @@ import json
 
 import typing
 
-from utils.decorators import time_it
+from util.decorators import time_it
 
 mid_path = r"D:\Code\Python\glucose-preprocess\mid"
 

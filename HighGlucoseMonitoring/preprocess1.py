@@ -2,7 +2,7 @@ import typing
 
 import pandas as pd
 
-from utils import path
+from util import path
 import os
 
 total_items = [
